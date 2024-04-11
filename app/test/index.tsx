@@ -1,4 +1,3 @@
-
 import { Link } from "expo-router";
 import { Button, StyleSheet, Text, View } from "react-native";
 

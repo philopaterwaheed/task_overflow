@@ -1,4 +1,5 @@
-import { register } from "../firebase/auth";
+/* import { register } from "../firebase/Auth"; */
+import { register } from "../firebase/Auth";
 import { Link } from "expo-router";
 import { Button, StyleSheet, Text, View } from "react-native";
 

@@ -22,8 +22,12 @@ async function register(email, password) {
   return cred;
 }
 
+async function resetEmail(email) {
+  const cred = await sendPasswordResetEmail(auth, email);
+  return cred;
+}
 async function login(email, password) {
   await signInWithEmailAndPassword(auth, email, password);
 }
 
-export { register, login };
+export { register, login ,resetEmail};

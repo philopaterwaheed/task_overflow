@@ -1,17 +1,17 @@
 import { Link ,router} from "expo-router";
 import { TextInput,Button, StyleSheet, Text, View,Pressable } from "react-native";
 import {useState} from "react";
-import { login } from "../../firebase/Auth";
+import { resetEmail  } from "../../firebase/Auth";
 export default function Page() {
 const [email, setEmail] = useState("");
-const [password, setPassword] = useState("");
 const [error, setError] = useState("");
 const [goterror, setGoterror]= useState(false); 
 const handlePress = async () => {
     try {
-        const credentials = await login(email, password);
+        const credentials = await resetEmail(email);
         console.log('credentials', credentials);
-        router.navigate(`/`);
+	router.replace("/auth/login");
+        
     } catch (error) {
         console.log('error', JSON.stringify(error));
         setError(error);
@@ -28,20 +28,9 @@ const handlePress = async () => {
 	    onChangeText={setEmail}
 	    style={{ borderWidth: 1, padding: 10, marginBottom: 10 }}
 	  />
-	  <TextInput
-	    placeholder="Password"
-	    value={password}
-	    onChangeText={setPassword}
-	    secureTextEntry
-	    style={{ borderWidth: 1, padding: 10, marginBottom: 10 }}
-	  />
 	  <Pressable style={styles.login} onPress={handlePress}>
-	      <Text>login</Text>
+	      <Text>send reset email</Text>
 	  </Pressable>
-	  <Pressable style={styles.forgotpassword} onPress={()=>router.replace("/auth/reset")}>
-	      <Text>forgot password</Text>
-	  </Pressable>
-	        {/* Using the ternary operator */}
       {goterror ? (
         <View style= {styles.error}>
           <Text>{error.message}</Text>

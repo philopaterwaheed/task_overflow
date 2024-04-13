@@ -1,9 +1,16 @@
 import { Tabs,Stack} from 'expo-router';
 import { Link , router } from "expo-router";
 import { Button, StyleSheet, Text, View } from "react-native";
+import login from './auth/login'
 export default function Layout() {
-   return <Tabs/> //screenOptions={
+   return (<Stack initialRouteName="auth/login">
+	<Stack.Screen name="auth/login" options={{ headerShown: false }} />
+	<Stack.Screen name="auth/reg" options={{ headerShown: false }} />
+	{/* <Stack.Screen name="auth/reset" options={{ headerShown: false }} /> */}
+	</Stack>
+    )
 //       {
+//
 // 	  headerStyle:{
 // 	      backgroundColor: 'red'
 // 	      

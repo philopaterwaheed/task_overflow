@@ -1,14 +1,14 @@
 import { Link ,router} from "expo-router";
 import { TextInput,Button, StyleSheet, Text, View,Pressable } from "react-native";
 import {useState} from "react";
-import { resetEmail  } from "../../firebase/Auth";
+import { resetPassword  } from "../../firebase/Auth";
 export default function Page() {
 const [email, setEmail] = useState("");
 const [error, setError] = useState("");
 const [goterror, setGoterror]= useState(false); 
 const handlePress = async () => {
     try {
-        const credentials = await resetEmail(email);
+        const credentials = await resetPassword(email);
         console.log('credentials', credentials);
 	router.replace("/auth/login");
         
@@ -20,7 +20,7 @@ const handlePress = async () => {
 };
   return (
     <View style={styles.container}>
-      <Text style={styles.subtitle}>login</Text>
+      <Text style={styles.subtitle}>reset password</Text>
        <View>
 	   <TextInput
 	    placeholder="Email"

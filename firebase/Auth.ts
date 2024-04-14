@@ -4,6 +4,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
+  signOut,
   confirmPasswordReset,
   signInWithCredential,
   FacebookAuthProvider,
@@ -26,8 +27,13 @@ async function resetPassword(email) {
   const cred = await sendPasswordResetEmail(auth, email);
   return cred;
 }
+async function signout() {
+  const cred = await signOut(auth);
+  console.log("signed out ");
+  return cred;
+}
 async function login(email, password) {
   return await signInWithEmailAndPassword(auth, email, password);
 }
 
-export { register, login ,resetPassword};
+export { register, login ,resetPassword , signout};

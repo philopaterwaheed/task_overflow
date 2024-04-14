@@ -2,15 +2,14 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 const firebaseConfig = {
-  apiKey: "AIzaSyCEOz4LIK72Pi15SL-FLBkxyMmuAvHR3oo",
-  authDomain: "school-e1ad8.firebaseapp.com",
-  projectId: "school-e1ad8",
-  storageBucket: "school-e1ad8.appspot.com",
-  messagingSenderId: "505892451466",
-  appId: "1:505892451466:web:5aa047a2dcba103794e973",
-  measurementId: "G-9PMCKZ0WDK"
+  apiKey: "AIzaSyBR2ONHgPObYxRgrekFWq63i5qnRoN1DVk",
+  authDomain: "task-852fc.firebaseapp.com",
+  projectId: "task-852fc",
+  storageBucket: "task-852fc.appspot.com",
+  messagingSenderId: "664704154074",
+  appId: "1:664704154074:web:6dd91b1f0e34e6f4c168e3",
+  measurementId: "G-G35GXV83CK"
 };
-
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);

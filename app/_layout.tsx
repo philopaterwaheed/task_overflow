@@ -5,8 +5,8 @@ import login from './auth/login'
 export default function Layout() {
    return (<Stack initialRouteName="auth/login">
 	<Stack.Screen name="auth/login" options={{ headerShown: false }} />
+	<Stack.Screen name="index" options={{  title: "Task Over Flow", headerStyle: {backgroundColor: '#8E6C88'}, headerTitleAlign: 'center'}} />
 	<Stack.Screen name="auth/reg" options={{ headerShown: false }} />
-	{/* <Stack.Screen name="auth/reset" options={{ headerShown: false }} /> */}
 	</Stack>
     )
 //       {

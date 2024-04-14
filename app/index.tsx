@@ -3,21 +3,34 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Link, router } from "expo-router";
 import { useState ,useEffect} from 'react';
 import { Button, StyleSheet, Text, View } from "react-native";
+import { signout} from '../firebase/Auth';
+import {get_users  , find_user} from "../firebase/db";
 
 export default function Page() {
-[user,setUser]=useState();
+const [user,setUser]=useState(null);
+const [tasks, setTaks]= useState([]); 
 const getUser = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem('user');
     if (!JSON.parse(jsonValue)){
 	router.replace("/auth/login");
     }
-    console.log("jsonValue:" , JSON.parse(jsonValue));
-    console.log("equals null: " , jsonValue == null);
-    setUser(jsonValue);
+    setUser(JSON.parse(jsonValue));
   } catch (e) {
     // error reading value
   }
+};
+const getTasks = async () => {
+  try {
+      if (user != null){
+	console.log("from use effect ",JSON.parse(user).uid);
+	const userObj = await find_user(JSON.parse(user).uid); 
+	console.log("from Tasks", userObj);
+      }
+  } catch (e) {
+    // error reading value
+  }
+  finally{}
 };
 const storeUser = async (value) => {
   try {
@@ -30,16 +43,19 @@ const storeUser = async (value) => {
 useEffect(() => {
     getUser();
   }, []);
+useEffect(() => {
+    if (user != null){
+   
+    getTasks();}
+  }, [user]);
   return (
     <View style={styles.container}>
-      <Text>user{user}</Text>
+      <Text>user{(user)?JSON.parse(user).uid:null}</Text>
       <View style={styles.main}>
         <Text style={styles.title}>Hello World</Text>
-	<Link href = {'/about'} asChild>
-	<Button title = "about "/>
-	</Link>
+	<Button title = "about " onPress = {()=>{get_users() ; console.log("users :: ")}}/>
         <Text style={styles.title}>Hello World</Text>
-	<Button title = "logut" onPress = {()=>{router.replace("/auth/login");storeUser(null);setUser(null)}}/>
+	<Button title = "logut" onPress = {()=>{signout();router.replace("/auth/login");storeUser(null);setUser(null)}}/>
         <Text style={styles.subtitle}> is the first page of your app.</Text>
       </View>
     </View>

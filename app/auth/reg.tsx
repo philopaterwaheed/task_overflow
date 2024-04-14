@@ -2,6 +2,7 @@ import { Link ,router} from "expo-router";
 import { TextInput,ActivityIndicator, StyleSheet, Text, View,Pressable } from "react-native";
 import {useState} from "react";
 import { register } from "../../firebase/Auth";
+import { add_user , get_users } from "../../firebase/db";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function Page() {
 const [email, setEmail] = useState("");
@@ -25,6 +26,8 @@ const handlePress = async () => {
         console.log('credentials', credentials.user);
 	storeUser(JSON.stringify(credentials.user));
 	setUser(credentials.user);
+	const added = await add_user(credentials.user.uid , credentials.user.email);
+	console.log("added :: ", added);
 	router.replace("/");
     } catch (error) {
 	setLoading(false);
@@ -40,7 +43,7 @@ const getUser = async () => {
   } catch (e) {
     // error reading value
   }
-};;
+};
   return (
     <View style={styles.container}>
       <Text style={styles.subtitle}>register</Text>

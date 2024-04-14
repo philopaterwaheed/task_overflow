@@ -1,6 +1,6 @@
 import { Link ,router} from "expo-router";
 import { TextInput,ActivityIndicator, StyleSheet, Text, View,Pressable } from "react-native";
-import {useState} from "react";
+import {useState , useEffect} from "react";
 import { register } from "../../firebase/Auth";
 import { add_user , get_users } from "../../firebase/db";
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -38,12 +38,20 @@ const handlePress = async () => {
 };
 const getUser = async () => {
   try {
-    const jsonValue = await AsyncStorage.getItem('user');
+    const jsonValue = await AsyncStorage.getItem('user'); 
+    if (JSON.parse(jsonValue)){
+	router.replace("/");
+    }
+
     setUser(jsonValue);
   } catch (e) {
     // error reading value
   }
 };
+useEffect(() => {
+    getUser();
+}, []);
+
   return (
     <View style={styles.container}>
       <Text style={styles.subtitle}>register</Text>

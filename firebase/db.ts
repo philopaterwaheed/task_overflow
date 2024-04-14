@@ -43,7 +43,7 @@ async function add_user(uid , email){
    let res =  await setDoc(docRef, {
 	uid : uid , 
 	user_email: email,
-	Tasks : [{}],
+	Tasks : [],
 	Admin : false ,
     }, uid);
     return res ; 
@@ -88,4 +88,4 @@ async function update_user(uid , user){
     console.log("user fetched " , user);
 };
 
-export {get_docs , get_users , add_user , del_user, find_user};
+export {get_docs , get_users , add_user ,update_user, del_user, find_user};

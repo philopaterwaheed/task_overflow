@@ -39,6 +39,9 @@ const handlePress = async () => {
 const getUser = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem('user');
+    if (JSON.parse(jsonValue)){
+	router.replace("/");
+    }
     setUser(jsonValue);
   } catch (e) {
     // error reading value
